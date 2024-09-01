@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      html {
+        font-family: Arial;
+        display: inline-block;
+        margin: 0px auto;
+        text-align: center;
+      }
+
+      .slidecontainer {
+        width: 100%;
+      }
+
+      .slider {
+        -webkit-appearance: none;
+        width: 50%;
+        height: 15px;
+        border-radius: 5px;
+        background: rgb(0,212,255);
+        background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 60%, rgba(2,0,36,1) 100%);
+        outline: none;
+        opacity: 0.5;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+      }
+
+      .slider:hover {
+        opacity: 2;
+      }
+      
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: rgb(26, 182, 202);
+        cursor: pointer;
+      }
+      
+      .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: rgb(0,212,255);
+        background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(9,9,121,1) 60%, rgba(2,0,36,1) 100%);
+        cursor: pointer;
+      }
+
+      .sliderText{
+        color: #FF204E;
+      }
+     
+         /* Style the botton start stop */
+   .btn{
+   /* position: relative;
+    border-radius: 15px 15px 15px 15px;
+    width: 8%;
+    height: 25px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #fa1cb7;
+    color: rgb(255, 255, 255);
+    */
+    background-image: linear-gradient( 135deg, #FFF886 10%, #F072B6 100%);
+  color: black;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 100px;
+   }
+
+   .btn:hover{
+    background-image: linear-gradient( 135deg, #FDD819 10%, #E80505 100%);
+   }
+
+.servoButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.serrvoButton{
+    
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.Sbt{
+    margin: 10px 15px 10px 15px;
+}
+
+.Sbt2, .Sbt3{
+    margin-left: 24px;   
+}
+
+.leftBt{
+    color: #008DDA;
+}
+
+.btn2,.btn3{
+  padding: 14px 28px;
+}
+
+.extra{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.extraBtn{
+  display: flex;
+  justify-content:space-evenly;
+  align-items: center;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.buzzbtn{
+  margin-left: 30px;
+}
+.ledbtn{
+  margin-left: 44px;
+}
+
+.lockbtn{
+  margin-left: 44px;
+}
+
+   a:link, a:visited {
+  background-image: linear-gradient( 135deg, #F6D242 10%, #FF52E5 100%);
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 100px;
+}
+
+a:hover, a:active {
+    background-image: linear-gradient( 135deg, #FDD819 10%, #E80505 100%);
+}
+       
+    /* Style the footer */
+   footer {
+    background-image: linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
+      padding: 8px;
+      text-align: center;
+      color: 0C359E;
+      font-family: Comic Sans MS;
+   }
+   @media (max-width: 600px) {
+     .extra{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .extraBtn{
+        display: flex;
+        /* flex-direction: column; */
+        justify-content:center;
+        align-items: center;
+        /* margin-left: 10%; */
+        padding-right:10% ;
+      }
+  }
+    </style>
+  </head>
+  
+  <body>
+    <h1>ESP8266 NodeMCU Web Server Controlled Servo Motor</h1>
+    <br><br>
+    <div class="slidecontainer">
+      <input type="range" min="0" max="180" value="50" class="slider" id="myRange">
+      <p class="sliderText">Servo angle: <span id="demo"></span>&deg</p>
+       <br><br>
+
+       <div class="servoButtons ">
+        <div class="serrvoButton serrvoButton1">
+            <div class="Sbt leftBt leftBt1"><label> Servo Sweep </label></div>
+            <div class="Sbt Sbt1"><button type="button" onclick="sendData2(1)" class="btn btn1">Start</button></div>
+        </div>
+            <!-- <br><br> -->
+
+        <div class="serrvoButton serrvoButton2">
+            <div class="Sbt leftBt leftBt2"><label> 45&deg Angle </label></div>
+            <div class="Sbt Sbt2"> <button type="button" onclick="sendData2(2)" class="btn btn2">45&deg</button>
+            </div>
+        </div>
+        <!-- <br><br> -->
+           
+        <div class="serrvoButton serrvoButton3"> 
+            <div class="Sbt leftBt leftBt3"><label> 90&degAngle </label></div>
+            <div class="Sbt Sbt3"><button type="button" onclick="sendData2(3)" class="btn btn3">90&deg</button>
+            </div>
+        </div>
+        <!-- <br><br> -->
+
+        <div class="serrvoButton serrvoButton4">
+            <div class="Sbt leftBt leftBt4"><label> 180&deg Angle </label></div>
+            <div class="Sbt Sbt4"><button type="button" onclick="sendData2(4)" class="btn btn4">180&deg</button></div>
+        </div>
+
+        <div class="serrvoButton serrvoButton8">
+          <div class="Sbt leftBt leftBt8"><label> 0&deg Angle </label></div>
+          <div class="Sbt Sbt8"> <button type="button" onclick="sendData2(8)" class="btn btn2">0&deg</button></div>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="extraBtn">
+
+      <div class="LED extra">
+        <div class="led leftBt"> <label> LED </label> </div>
+        <div> <button class="ledbtn btn" onclick="sendData2(5)"> ON/OFF </button> </div>
+    </div>   
+    <br><br>
+    
+      <div class="Lock extra">
+        <div class="lock leftBt"> <label > LOCK </label> </div>
+        <div> <button class="lockbtn btn" onclick="sendData2(7)"> ON/OFF </button> </div>
+      </div>
+      <br><br>
+
+          <div class="Buzzer extra">
+            <div class="buzz leftBt"> <label > Buzzer </label> </div>
+            <div> <button class="buzzbtn btn" onclick="sendData2(6)"> ON/OFF </button> </div>
+          </div>
+    </div>
+  
+
+      <label><span id="isStatusSER1"></span></label>
+
+    </div>
+    
+    <script>
+      function sendData(pos) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+          }
+        };
+        xhttp.open("GET", "setPOS?servoPOS="+pos, true);
+        xhttp.send();
+      } 
+        /* fungsi send data on/off */
+        function sendData2(StatusSer1) { 
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) { 
+            document.getElementById("SERstate1").innerHTML = this.responseText;     
+          }
+        };
+        
+        xhttp.open("GET", "setSER1?;SERstate1=" + StatusSer1, true);   
+        xhttp.send();
+        }
+
+    /* fungsi read data on/off */
+        function getDataSER1() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("isStatusSER1").innerHTML = this.responseText;
+          }
+        };
+        xhttp.open("PUT", "readSER1", true);    
+        xhttp.send();
+        }
+      var slider = document.getElementById("myRange");
+      var output = document.getElementById("demo");
+      output.innerHTML = slider.value;
+      slider.oninput = function() {
+        output.innerHTML = this.value;
+        sendData(output.innerHTML);
+      }
+    
+
+    </script>
+     <br><br><br><br>
+     <footer>
+     <p>
+       Made by - Ankur </br>
+    </p>
+     <p></p>
+     <a href="https://www.google.com" target="_blank">Thank You!</a>
+
+    </footer>
+
+  </body>
+
+</html>
